@@ -55,6 +55,12 @@ jobs:
       - name: Checkout latest code
         uses: actions/checkout@v3
 
+      - name: Download lambda code from build-lambda job
+        uses: actions/download-artifact@v3
+        with:
+          name: lambda-code
+          path: ../lambda/product-handler/build
+
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v3
         with:
