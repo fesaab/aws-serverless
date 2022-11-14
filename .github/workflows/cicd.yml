@@ -59,7 +59,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: lambda-code
-          path: ../lambda/product-handler/build
+          path: lambda/product-handler/build
 
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v3
