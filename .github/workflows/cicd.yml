@@ -10,8 +10,8 @@ env:
   NODE_VERSION: 16.x
 
 jobs:
-  # 1 => Build and test the lambda source codes
-  build-lambda:
+  # 1 => Build and test the source codes
+  ci:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -44,8 +44,8 @@ jobs:
           retention-days: 5
 
   
-  # 2 => Build Infrastructure template
-  build-cdk:
+  # 2 => Deploy the updates
+  cd:
     runs-on: ubuntu-latest
     needs: build-lambda
     defaults:
