@@ -33,11 +33,14 @@ jobs:
       - name: Run tests
         run: npm run test
 
+      - name: Zip build files
+        run: zip -r build.zip ./build
+
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: lambda-code
-          path: lambda/product-handler/build
+          path: lambda/product-handler/build.zip
           retention-days: 5
 
   
@@ -56,7 +59,10 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: lambda-code
-          path: lambda/product-handler/build
+          path: lambda/product-handler
+
+      - name: Unzip build files
+        run: cd ../lambda/product-handler && unzip build.zip
 
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v3
