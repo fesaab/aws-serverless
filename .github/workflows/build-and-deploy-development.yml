@@ -4,7 +4,7 @@ concurrency: developemnt
 
 on:
   push:
-    branches: [ "feature/*" ]
+    branches: [ "develop" ]
 
 env:
   NODE_VERSION: 16.x
