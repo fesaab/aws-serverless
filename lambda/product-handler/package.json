@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "build": "tsc",
-    "build:prod": "tsc && gulp",
+    "build:prd": "tsc && gulp",
     "test": "jest --maxWorkers=1 --detectOpenHandles --coverage"
   },
   "devDependencies": {
