@@ -11,7 +11,7 @@ jobs:
   # 1 => Build and test the source codes
   build:
     runs-on: ubuntu-latest
-    environment: production
+    environment: staging
     defaults:
       run:
         working-directory: lambda/product-handler
@@ -46,7 +46,7 @@ jobs:
   # 2 => Deploy the updates
   validate-deploy:
     runs-on: ubuntu-latest
-    environment: production
+    environment: staging
     needs: build
     defaults:
       run:
