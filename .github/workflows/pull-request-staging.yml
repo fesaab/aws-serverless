@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: Staging Pull Request Pipeline
 
 on:
   pull_request:
