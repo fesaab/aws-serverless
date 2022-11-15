@@ -22,9 +22,10 @@ export const handler = async (event: APIGatewayEvent): Promise<APIGatewayProxyRe
     console.log(`Product created with id='${product.id}'! =D`);
 
     // Publishes a PRODUCT_CREATION event on SNS
+    let snsPublishResult;
     try {
         const snsClient = new SNSClient({ region: process.env.SNS_REGION });
-        const snsPublishResult = await snsClient.send(new PublishCommand({
+        snsPublishResult = await snsClient.send(new PublishCommand({
             Message: JSON.stringify(product),
             MessageAttributes: {
                 "TYPE": {
@@ -48,7 +49,8 @@ export const handler = async (event: APIGatewayEvent): Promise<APIGatewayProxyRe
     return {
         statusCode: 200,
         body: JSON.stringify({
-            product: product
+            product: product,
+            snsPublished: snsPublishResult ? true : false
         }),
     };
 };
