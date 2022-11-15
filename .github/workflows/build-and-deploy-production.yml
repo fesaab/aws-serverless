@@ -63,7 +63,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: lambda-code
-          path: lambda/product-handler/build
+          path: lambda/product-handler
 
       - name: Unzip build files
         run: cd ../lambda/product-handler && unzip build.zip
