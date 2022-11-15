@@ -36,7 +36,8 @@ export const handler = async (event: APIGatewayEvent): Promise<APIGatewayProxyRe
                     StringValue: "SELLER_1"
                 }
             },
-            TopicArn: process.env.SNS_TOPIC_ARN
+            TopicArn: process.env.SNS_TOPIC_ARN,
+            MessageGroupId: `PRODUCT_${product.id}`
         }));
         console.log(`SNS message published: ${snsPublishResult}`);
     } catch (except) {
