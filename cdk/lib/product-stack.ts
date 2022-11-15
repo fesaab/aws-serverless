@@ -7,11 +7,21 @@ export class ProductStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // Lambda Handler
-    const productHandler = new lambda.Function(this, "ProductListHandler", {
+    // Product List Handler
+    const productListHandler = new lambda.Function(this, "ProductListHandler", {
       runtime: lambda.Runtime.NODEJS_16_X,
       code: lambda.Code.fromAsset("../lambda/product-handler/build/"),
       handler: "product-list-handler.handler",
+      environment: {
+        ENV: "TEST"
+      }
+    });
+
+    // Product Create Handler
+    const productCreateHandler = new lambda.Function(this, "ProductCreateHandler", {
+      runtime: lambda.Runtime.NODEJS_16_X,
+      code: lambda.Code.fromAsset("../lambda/product-handler/build/"),
+      handler: "product-create-handler.handler",
       environment: {
         ENV: "TEST"
       }
@@ -23,10 +33,17 @@ export class ProductStack extends cdk.Stack {
       description: "Product related APIs"
     });
 
-    const listProductsLambdaIntegration = new apigateway.LambdaIntegration(productHandler, {
+    // Method GET /
+    const listProductsLambdaIntegration = new apigateway.LambdaIntegration(productListHandler, {
       requestTemplates: { "application/json": '{ "statusCode": "200" }' }
     });
+    api.root.addMethod("GET", listProductsLambdaIntegration);
 
-    api.root.addMethod("GET", listProductsLambdaIntegration); // GET /
+
+    // Method POST /
+    const createProductsLambdaIntegration = new apigateway.LambdaIntegration(productCreateHandler, {
+      requestTemplates: { "application/json": '{ "statusCode": "200" }' }
+    });
+    api.root.addMethod("POST", createProductsLambdaIntegration);
   }
 }
