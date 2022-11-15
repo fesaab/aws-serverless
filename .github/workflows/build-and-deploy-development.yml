@@ -13,7 +13,6 @@ jobs:
   # 1 => Build and test the source codes
   build:
     runs-on: ubuntu-latest
-    environment: development
     defaults:
       run:
         working-directory: lambda/product-handler
