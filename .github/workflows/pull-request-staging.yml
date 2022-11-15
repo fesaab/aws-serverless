@@ -44,7 +44,7 @@ jobs:
 
   
   # 2 => Deploy the updates
-  deploy:
+  validate-deploy:
     runs-on: ubuntu-latest
     environment: production
     needs: build
