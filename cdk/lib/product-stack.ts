@@ -40,7 +40,9 @@ export class ProductStack extends cdk.Stack {
       code: lambda.Code.fromAsset("../lambda/product-handler/build/"),
       handler: "product-create-handler.handler",
       environment: {
-        ENV: "TEST"
+        ENV: "TEST",
+        SNS_REGION: "us-east-1",
+        SNS_TOPIC_ARN: productUpdateSNSTopic.topicArn
       }
     });
     new cdk.CfnOutput(this, 'productCreateHandlerArn', {
