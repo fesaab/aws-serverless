@@ -3,9 +3,9 @@ import { APIGatewayEvent } from 'aws-lambda';
 import { handler } from '../src/product-create-handler'
 
 describe('Product Create', () => {
-
+    
     let productCreateEvent: APIGatewayEvent;
-
+    
     beforeEach(async () => {
         productCreateEvent = JSON.parse(readFileSync('./events/product-create.json', 'utf-8'));
     });
