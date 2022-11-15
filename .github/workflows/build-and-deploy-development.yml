@@ -1,17 +1,17 @@
-name: CI/CD Pipeline
+name: Development CI/CD Pipeline
+
+concurrency: developemnt
 
 on:
   push:
-    branches: [ "main", "release/*" ]
-  pull_request:
-    branches: [ "main", "release/*" ]
+    branches: [ "develop" ]
 
 env:
   NODE_VERSION: 16.x
 
 jobs:
   # 1 => Build and test the source codes
-  ci:
+  build:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -45,9 +45,10 @@ jobs:
 
   
   # 2 => Deploy the updates
-  cd:
+  deploy:
     runs-on: ubuntu-latest
-    needs: ci
+    environment: development
+    needs: build
     defaults:
       run:
         working-directory: cdk
@@ -55,7 +56,7 @@ jobs:
       - name: Checkout latest code
         uses: actions/checkout@v3
 
-      - name: Download lambda code from build-lambda job
+      - name: Download lambda code from ci
         uses: actions/download-artifact@v3
         with:
           name: lambda-code
