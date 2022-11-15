@@ -12,7 +12,7 @@ export class ProductStack extends cdk.Stack {
     const productUpdateSNSTopic = new sns.Topic(this, 'ProductUpdateSNSTopic', {
       contentBasedDeduplication: true,
       displayName: 'Product updates topic',
-      fifo: false,
+      fifo: true,
       topicName: 'productUpdateSNSTopic',
     });
     new cdk.CfnOutput(this, 'productUpdateSNSTopicArn', {
